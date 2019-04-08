@@ -3,7 +3,6 @@ import { Observable } from 'rxjs';
 import { LOG4JS_REQUEST_LOGGER, LOG4JS_RESPONSE_LOGGER } from './log4js.constant';
 import { Logger } from 'log4js';
 import { Log4jsInterceptorAbstract } from './log4js.interceptor.abstract';
-import { stringify } from 'circular-json-es6';
 
 @Injectable()
 export class Log4jsInterceptor extends Log4jsInterceptorAbstract {
@@ -22,7 +21,7 @@ export class Log4jsInterceptor extends Log4jsInterceptorAbstract {
   }
 
   requestFormat(httpRequest: any): string {
-    return stringify({
+    return JSON.stringify({
       url: httpRequest.url,
       method: httpRequest.method,
       params: httpRequest.params,
@@ -35,6 +34,6 @@ export class Log4jsInterceptor extends Log4jsInterceptorAbstract {
   }
 
   responseFormat(httpResponse: any): string {
-    return stringify(httpResponse);
+    return JSON.stringify(httpResponse);
   }
 }
